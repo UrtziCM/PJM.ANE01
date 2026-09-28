@@ -31,12 +31,12 @@ public class UserManager : MonoBehaviour
 
     public void ShowUsers(Predicate<User> filterIn)
     {
+
         foreach (Transform child in UserListContent)
         {
-            int key = panelPairs.FirstOrDefault(x => x.Value == child).Key;
             Destroy(child.gameObject);
-            panelPairs.Remove(key);
         }
+        panelPairs.Clear();
 
         foreach (User u in users)
         {
@@ -50,7 +50,10 @@ public class UserManager : MonoBehaviour
     public void DeleteUser(int id)
     {
         User u = users.Find(user => user.ID == id);
-        Destroy(panelPairs[u.ID]);
+        if (panelPairs.ContainsKey(u.ID))
+        {
+            Destroy(panelPairs[u.ID]);
+        }
         panelPairs.Remove(u.ID);
         users.Remove(u);
     }

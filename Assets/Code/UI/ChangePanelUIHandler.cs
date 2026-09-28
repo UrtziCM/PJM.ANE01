@@ -8,7 +8,7 @@ public class ChangePanelUIHandler : MonoBehaviour
     public void NextMode()
     {
         mode++;
-        mode %= 3;
+        mode %= panels.Length;
         foreach (GameObject go in panels)
         {
             go.SetActive(false);
